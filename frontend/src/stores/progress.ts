@@ -11,7 +11,7 @@ export const useProgressStore = defineStore("progress", {
   }),
 
   getters: {
-    currentLevel: (state): string | null => state.progress?.level || null,
+    currentLevel: (): string | null => null, // Level is tracked separately in words store
     totalWords: (state): number => state.progress?.totalWords || 0,
     masteredWords: (state): number => state.progress?.masteredWords || 0,
     currentStreak: (state): number => state.progress?.currentStreak || 0,
@@ -139,8 +139,8 @@ export const useProgressStore = defineStore("progress", {
     // Update user progress (e.g., after completing a quiz or review)
     async updateProgress(
       level: EnglishLevel | null = null,
-      quizCompleted = false,
-      reviewCompleted = false
+      _quizCompleted = false,
+      _reviewCompleted = false
     ): Promise<UserProgress> {
       this.loading = true;
       this.error = null;

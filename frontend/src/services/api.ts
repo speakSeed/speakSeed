@@ -1,8 +1,4 @@
-import axios, {
-  AxiosInstance,
-  InternalAxiosRequestConfig,
-  AxiosError,
-} from "axios";
+import axios from "axios";
 import type {
   Word,
   UserWord,
@@ -157,7 +153,7 @@ export const quizApi = {
   },
 
   // Alias for generate - used by quiz components
-  getQuiz(sessionId: string, mode = "definition", count = 10): Promise<any> {
+  getQuiz(_sessionId: string, mode = "definition", count = 10): Promise<any> {
     return api.post("/quiz/generate", { mode, count });
   },
 

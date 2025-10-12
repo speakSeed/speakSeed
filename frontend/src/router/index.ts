@@ -72,7 +72,7 @@ declare module "vue-router" {
 }
 
 // Update page title
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
   const appName = import.meta.env.VITE_APP_NAME || "Vocabulary Training";
   document.title = to.meta.title ? `${to.meta.title} - ${appName}` : appName;
   next();

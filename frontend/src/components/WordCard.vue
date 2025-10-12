@@ -222,7 +222,11 @@
     </div>
 
     <!-- Hidden audio element for native audio playback -->
-    <audio ref="audioPlayer" :src="word.audioUrl" class="hidden"></audio>
+    <audio
+      ref="audioPlayer"
+      :src="word.audioUrl || undefined"
+      class="hidden"
+    ></audio>
   </div>
 </template>
 
@@ -278,18 +282,13 @@ const spellWord = () => {
   speech.spellOut(props.word.word);
 };
 
-const handleImageError = (event: Event) => {
-  const target = event.target as HTMLImageElement;
-
+const handleImageError = () => {
   // Prevent infinite loop - only try once
   if (!imageLoadError.value) {
     imageLoadError.value = true;
     showImage.value = false;
     console.log(`Failed to load image for word: ${props.word.word}`);
   }
-
-  // Stop the error from propagating
-  event.stopPropagation();
 };
 </script>
 
