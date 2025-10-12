@@ -8,9 +8,9 @@ $diagnostics = [
     'vendor_exists' => file_exists(__DIR__ . '/../vendor/autoload.php'),
     'bootstrap_exists' => file_exists(__DIR__ . '/../bootstrap/app.php'),
     'env_vars' => [
-        'APP_KEY' => env('APP_KEY') ? 'Set' : 'Not set',
-        'DB_HOST' => env('DB_HOST') ? env('DB_HOST') : 'Not set',
-        'DATABASE_URL' => env('DATABASE_URL') ? 'Set' : 'Not set',
+        'APP_KEY' => getenv('APP_KEY') ? 'Set' : 'Not set',
+        'DB_HOST' => getenv('DB_HOST') ? getenv('DB_HOST') : 'Not set',
+        'DATABASE_URL' => getenv('DATABASE_URL') ? 'Set' : 'Not set',
     ],
 ];
 
