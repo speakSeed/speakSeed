@@ -3,7 +3,7 @@ import vue from "@vitejs/plugin-vue";
 import path from "path";
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   plugins: [vue()],
   resolve: {
     alias: {
@@ -13,12 +13,18 @@ export default defineConfig({
   server: {
     port: 5173,
     strictPort: false,
-    host: '0.0.0.0',
+    host: true,
     hmr: {
-      clientPort: 443,
+      protocol: 'wss',
+      host: typeof process !== 'undefined' && process.env.VITE_HMR_HOST,
+      port: 443,
     },
   },
   build: {
     target: "esnext",
   },
-});
+  // Allow all origins in development
+  preview: {
+    host: true,
+  },
+}));
