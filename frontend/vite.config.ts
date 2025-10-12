@@ -13,6 +13,10 @@ export default defineConfig({
   server: {
     port: 5173,
     strictPort: false,
+    host: '0.0.0.0',
+    hmr: {
+      clientPort: 443,
+    },
   },
   build: {
     target: "esnext",
