@@ -1,6 +1,7 @@
 {
   "version": 2,
   "framework": null,
+  "public": true,
   "functions": {
     "api/index.php": {
       "runtime": "vercel-php@0.7.2"
@@ -20,4 +21,3 @@
     "CACHE_DRIVER": "array"
   }
 }
-
