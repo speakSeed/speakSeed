@@ -13,6 +13,10 @@
       "dest": "/api/test.php"
     },
     {
+      "src": "/api/diagnostic",
+      "dest": "/api/diagnostic.php"
+    },
+    {
       "src": "/(.*)",
       "dest": "/api/index.php"
     }
