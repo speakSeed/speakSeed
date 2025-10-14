@@ -1,7 +1,4 @@
-FROM php:8.2-fpm
-
-# Set working directory
-WORKDIR /var/www
+FROM php:8.2-cli
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -14,23 +11,29 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip
 
-# Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
-
 # Install PHP extensions
 RUN docker-php-ext-install pdo_pgsql pgsql mbstring exif pcntl bcmath gd
 
-# Get latest Composer
+# Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copy application files
-COPY . /var/www
+# Set working directory
+WORKDIR /var/www
+
+# Copy composer files
+COPY composer.json composer.lock ./
+
+# Install dependencies
+RUN composer install --no-dev --optimize-autoloader
+
+# Copy application code
+COPY . .
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www
 
-# Expose port 9000
-EXPOSE 9000
+# Expose port
+EXPOSE 8000
 
-CMD ["php-fpm"]
-
+# Start command
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
